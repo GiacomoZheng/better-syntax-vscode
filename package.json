@@ -1,0 +1,52 @@
+{
+    "name": "vscode-better-syntax",
+    "displayName": "Vscode Better Syntax",
+    "description": "better-syntax for some languages I'm using",
+    "version": "0.0.1",
+
+    "__icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.24.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Snippets"
+    ],
+
+    "publisher": "giacomozheng",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/GiacomoZheng/vscode-better-syntax.git"
+    },
+    "qna": "https://github.com/GiacomoZheng/vscode-better-syntax/issues",
+    
+    "contributes": {
+        "languages": [
+            {
+                "id": "latex",
+                "aliases": ["LaTeX"],
+                "extensions": [".tex"],
+                "configuration": "./language-configuration/latex.language-configuration.json"
+
+            }
+        ],
+        "grammars": [
+            {
+                "language": "latex",
+                "scopeName": "text.tex.latex",
+                "path": "./syntaxes/latex.tmLanguage.json"
+            }
+        ],
+        "configuration":[
+        ],
+        "commands": [],
+
+        "configurationDefaults": {
+            "__": {
+                "files.autoGuessEncoding": false,
+                "files.encoding": "utf8",
+                "editor.insertSpaces": false
+            }
+        }
+    }
+}
