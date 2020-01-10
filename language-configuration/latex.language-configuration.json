@@ -12,6 +12,8 @@
 		["\\left<", "\\right>"],
 		["$", "$"],
 
+		["\\left.", "\\right"],
+
 		["{", "}"],
 		["[", "]"],
 		["(", ")"]
@@ -58,8 +60,15 @@
 		"increaseIndentPattern": "$ ^",
 		"decreaseIndentPattern": "(?:\\s*)\\\\item"
 	},
-	"autoCloseBefore": ";:.,=}])>\\` \n\t$",
+	// "autoCloseBefore": ";:.,=}])>\\` \n\t$",
 	"wordPattern": "(?x) [^\\s `' \" ~ _ ! ? | $ # @ % ^ & : <> () [\\] \\/]+", // (?x) [^ {} ]
 	// "1":"(?x)(?:[0-9 a-z A-Z \\\\ * \\.])+",
 	// "2": "(__)|(\\*\\*)|(@.)|(\\.\\.\\.)|([^\\s`'\"~_!?|$#@%^&*\\-=+;:,.<>(){}[\\]\\\\\\/]{2,})"
+	"folding": {
+		"offSide": true,
+		"markers": {
+			"start": "^\\s*%#Region\\b",
+			"end": "^\\s*%#Endregion\\b"
+		}
+	}
 }

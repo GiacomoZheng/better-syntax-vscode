@@ -9,8 +9,7 @@
         "vscode": "^1.24.0"
     },
     "categories": [
-        "Programming Languages",
-        "Snippets"
+        "Programming Languages"
     ],
 
     "publisher": "giacomozheng",
@@ -34,19 +33,35 @@
             {
                 "language": "latex",
                 "scopeName": "text.tex.latex",
-                "path": "./syntaxes/latex.tmLanguage.json"
+                "path": "./syntaxes/latex.tmLanguage.json",
+                "embeddedLanguages": {
+					"source.asymptote": "asymptote",
+					"source.cpp": "cpp",
+					"source.css": "css",
+					"source.dot": "dot",
+					"source.gnuplot": "gnuplot",
+					"text.html": "html",
+					"source.java": "java",
+					"source.js": "js",
+					"source.lua": "lua",
+					"source.python": "python",
+					"source.scala": "scala",
+					"text.xtml": "xtml",
+					"source.yaml": "yaml"
+				}
             }
         ],
-        "configuration":[
-        ],
-        "commands": [],
 
         "configurationDefaults": {
-            "__": {
+            "[latex]": {
                 "files.autoGuessEncoding": false,
                 "files.encoding": "utf8",
-                "editor.insertSpaces": false
-            }
-        }
+                "editor.insertSpaces": false,
+
+				"editor.formatOnPaste": false,
+				"editor.formatOnSave": false,
+				"editor.suggestSelection": "recentlyUsedByPrefix"
+			}
+		}
     }
 }

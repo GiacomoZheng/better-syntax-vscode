@@ -437,11 +437,10 @@
 					"include": "#reference"
 				},
 				{
-					"include": "#fonts"
+					"include": "#layouts"
 				},
 				{
-					"match": "\\\\\\\\",
-					"name": "keyword.control.newline.latex"
+					"include": "#fonts"
 				},
 				{
 					"match": "(?<!\\\\)&",
@@ -623,7 +622,225 @@
 						}
 					]
 				}
-			]
+			],
+			"repository": {
+				"layouts": {
+					"patterns": [
+						{
+							"match": "\\\\(?:newline|pagebreak|clearpage|linebreak|pause)(?:\\b)",
+							"name": "keyword.control.layout.tex"
+						},
+						{
+							"match": "\\\\\\\\",
+							"name": "keyword.control.newline.latex"
+						}
+					]
+				},
+				"reference": {
+					"patterns": [
+						{
+							"include": "#definition-label"
+						},
+						{
+							"captures": {
+								"1": {
+									"name": "support.function.url.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.function.latex"
+								},
+								"3": {
+									"name": "punctuation.definition.arguments.begin.latex"
+								},
+								"4": {
+									"name": "markup.underline.link.latex"
+								},
+								"5": {
+									"name": "punctuation.definition.arguments.end.latex"
+								}
+							},
+							"match": "(?:\\s*)((\\\\)(?:url|href))(\\{)([^}]*)(\\})",
+							"name": "meta.function.link.url.latex"
+						},
+						{
+							"begin": "((\\\\)(?:\\w*[r|R]ef\\*?))(\\{)",
+							"beginCaptures": {
+								"1": {
+									"name": "keyword.control.ref.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.keyword.latex"
+								},
+								"3": {
+									"name": "punctuation.definition.arguments.begin.latex"
+								}
+							},
+							"end": "\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.arguments.end.latex"
+								}
+							},
+							"name": "meta.reference.label.latex",
+							"patterns": [
+								{
+									"match": "[a-zA-Z0-9\\.,:/*!^_-]",
+									"name": "constant.other.reference.label.latex"
+								}
+							]
+						}
+					]
+				},
+				"fonts": {
+					"patterns": [
+						{
+							"begin": "((\\\\)footnote)((?:\\[[^\\[]*?\\])*)(\\{)",
+							"beginCaptures": {
+								"1": {
+									"name": "support.function.footnote.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.function.latex"
+								},
+								"3": {
+									"patterns": [
+										{
+											"include": "#optional-arg"
+										}
+									]
+								},
+								"4": {
+									"name": "punctuation.definition.footnote.begin.latex"
+								}
+							},
+							"contentName": "entity.name.footnote.latex",
+							"end": "\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.footnote.end.latex"
+								}
+							},
+							"patterns": [
+								{
+									"include": "text.tex#braces"
+								},
+								{
+									"include": "#main-blocks"
+								}
+							]
+						},
+						{
+							"begin": "((\\\\)emph)(\\{)",
+							"beginCaptures": {
+								"1": {
+									"name": "support.function.emph.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.function.latex"
+								},
+								"3": {
+									"name": "punctuation.definition.emph.begin.latex"
+								}
+							},
+							"contentName": "markup.italic.emph.latex",
+							"end": "\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.emph.end.latex"
+								}
+							},
+							"name": "meta.function.emph.latex",
+							"patterns": [
+								{
+									"include": "text.tex#braces"
+								}
+							]
+						},
+						{
+							"begin": "((\\\\)textit)(\\{)",
+							"captures": {
+								"1": {
+									"name": "support.function.textit.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.function.latex"
+								},
+								"3": {
+									"name": "punctuation.definition.textit.begin.latex"
+								}
+							},
+							"comment": "We put the keyword in a capture and name this capture, so that disabling spell checking for “keyword” won't be inherited by the argument to \\textit{...}.\n\nPut specific matches for particular LaTeX keyword.functions before the last two more general functions",
+							"contentName": "markup.italic.textit.latex",
+							"end": "\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.textit.end.latex"
+								}
+							},
+							"name": "meta.function.textit.latex",
+							"patterns": [
+								{
+									"include": "text.tex#braces"
+								}
+							]
+						},
+						{
+							"begin": "((\\\\)textbf)(\\{)",
+							"captures": {
+								"1": {
+									"name": "support.function.textbf.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.function.latex"
+								},
+								"3": {
+									"name": "punctuation.definition.textbf.begin.latex"
+								}
+							},
+							"contentName": "markup.bold.textbf.latex",
+							"end": "\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.textbf.end.latex"
+								}
+							},
+							"name": "meta.function.textbf.latex",
+							"patterns": [
+								{
+									"include": "text.tex#braces"
+								}
+							]
+						},
+						{
+							"begin": "((\\\\)texttt)(\\{)",
+							"captures": {
+								"1": {
+									"name": "support.function.texttt.latex"
+								},
+								"2": {
+									"name": "punctuation.definition.function.latex"
+								},
+								"3": {
+									"name": "punctuation.definition.texttt.begin.latex"
+								}
+							},
+							"contentName": "markup.raw.texttt.latex",
+							"end": "\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.definition.texttt.end.latex"
+								}
+							},
+							"name": "meta.function.texttt.latex",
+							"patterns": [
+								{
+									"include": "text.tex#braces"
+								}
+							]
+						}
+					]
+				}
+			}
 		},
 
 		"other-blocks": {
@@ -1191,7 +1408,6 @@
 				}
 			]
 		},
-
 		"other-functions": {
 			"patterns": [
 				{
@@ -1573,223 +1789,6 @@
 				}
 			]
 		},
-		"reference": {
-			"patterns": [
-				{
-					"include": "#definition-label"
-				},
-				{
-					"captures": {
-						"1": {
-							"name": "support.function.url.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.function.latex"
-						},
-						"3": {
-							"name": "punctuation.definition.arguments.begin.latex"
-						},
-						"4": {
-							"name": "markup.underline.link.latex"
-						},
-						"5": {
-							"name": "punctuation.definition.arguments.end.latex"
-						}
-					},
-					"match": "(?:\\s*)((\\\\)(?:url|href))(\\{)([^}]*)(\\})",
-					"name": "meta.function.link.url.latex"
-				},
-				{
-					"begin": "((\\\\)(?:\\w*[r|R]ef\\*?))(\\{)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.control.ref.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.keyword.latex"
-						},
-						"3": {
-							"name": "punctuation.definition.arguments.begin.latex"
-						}
-					},
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.arguments.end.latex"
-						}
-					},
-					"name": "meta.reference.label.latex",
-					"patterns": [
-						{
-							"match": "[a-zA-Z0-9\\.,:/*!^_-]",
-							"name": "constant.other.reference.label.latex"
-						}
-					]
-				}
-			]
-		},
-		"layouts": {
-			"patterns": [
-				{
-					"match": "\\\\(?:newline|pagebreak|clearpage|linebreak|pause)(?:\\b)",
-					"name": "keyword.control.layout.tex"
-				},
-				{
-					"match": "\\\\(?:|pagebreak|clearpage|linebreak|pause)(?:\\b)",
-					"name": "keyword.control.layout.tex"
-				}
-			]
-		},
-		"fonts": {
-			"patterns": [
-				{
-					"begin": "((\\\\)footnote)((?:\\[[^\\[]*?\\])*)(\\{)",
-					"beginCaptures": {
-						"1": {
-							"name": "support.function.footnote.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.function.latex"
-						},
-						"3": {
-							"patterns": [
-								{
-									"include": "#optional-arg"
-								}
-							]
-						},
-						"4": {
-							"name": "punctuation.definition.footnote.begin.latex"
-						}
-					},
-					"contentName": "entity.name.footnote.latex",
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.footnote.end.latex"
-						}
-					},
-					"patterns": [
-						{
-							"include": "text.tex#braces"
-						},
-						{
-							"include": "#main-blocks"
-						}
-					]
-				},
-				{
-					"begin": "((\\\\)emph)(\\{)",
-					"beginCaptures": {
-						"1": {
-							"name": "support.function.emph.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.function.latex"
-						},
-						"3": {
-							"name": "punctuation.definition.emph.begin.latex"
-						}
-					},
-					"contentName": "markup.italic.emph.latex",
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.emph.end.latex"
-						}
-					},
-					"name": "meta.function.emph.latex",
-					"patterns": [
-						{
-							"include": "text.tex#braces"
-						}
-					]
-				},
-				{
-					"begin": "((\\\\)textit)(\\{)",
-					"captures": {
-						"1": {
-							"name": "support.function.textit.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.function.latex"
-						},
-						"3": {
-							"name": "punctuation.definition.textit.begin.latex"
-						}
-					},
-					"comment": "We put the keyword in a capture and name this capture, so that disabling spell checking for “keyword” won't be inherited by the argument to \\textit{...}.\n\nPut specific matches for particular LaTeX keyword.functions before the last two more general functions",
-					"contentName": "markup.italic.textit.latex",
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.textit.end.latex"
-						}
-					},
-					"name": "meta.function.textit.latex",
-					"patterns": [
-						{
-							"include": "text.tex#braces"
-						}
-					]
-				},
-				{
-					"begin": "((\\\\)textbf)(\\{)",
-					"captures": {
-						"1": {
-							"name": "support.function.textbf.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.function.latex"
-						},
-						"3": {
-							"name": "punctuation.definition.textbf.begin.latex"
-						}
-					},
-					"contentName": "markup.bold.textbf.latex",
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.textbf.end.latex"
-						}
-					},
-					"name": "meta.function.textbf.latex",
-					"patterns": [
-						{
-							"include": "text.tex#braces"
-						}
-					]
-				},
-				{
-					"begin": "((\\\\)texttt)(\\{)",
-					"captures": {
-						"1": {
-							"name": "support.function.texttt.latex"
-						},
-						"2": {
-							"name": "punctuation.definition.function.latex"
-						},
-						"3": {
-							"name": "punctuation.definition.texttt.begin.latex"
-						}
-					},
-					"contentName": "markup.raw.texttt.latex",
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.texttt.end.latex"
-						}
-					},
-					"name": "meta.function.texttt.latex",
-					"patterns": [
-						{
-							"include": "text.tex#braces"
-						}
-					]
-				}
-			]
-		},
-
 		"optional-arg": {
 			"patterns": [
 				{
