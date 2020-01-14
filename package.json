@@ -1,10 +1,10 @@
 {
-    "name": "vscode-better-syntax",
+    "name": "better-syntax-vscode",
     "displayName": "Vscode Better Syntax",
     "description": "better-syntax for some languages I'm using",
     "version": "0.0.1",
 
-    "__icon": "images/icon.png",
+    "icon": "",
     "engines": {
         "vscode": "^1.24.0"
     },
@@ -15,18 +15,22 @@
     "publisher": "giacomozheng",
     "repository": {
         "type": "git",
-        "url": "https://github.com/GiacomoZheng/vscode-better-syntax.git"
+        "url": "https://github.com/GiacomoZheng/better-syntax-vscode.git"
     },
-    "qna": "https://github.com/GiacomoZheng/vscode-better-syntax/issues",
-    
+    "qna": "https://github.com/GiacomoZheng/better-syntax-vscode/issues",
+
+    "extensionPack": [
+        "james-yu.latex-workshop"
+    ],
+    "extensionKind": [ "ui" ],
+
     "contributes": {
         "languages": [
             {
                 "id": "latex",
-                "aliases": ["LaTeX"],
+                "aliases": ["LaTeX", "latex"],
                 "extensions": [".tex"],
                 "configuration": "./language-configuration/latex.language-configuration.json"
-
             }
         ],
         "grammars": [

@@ -10,9 +10,21 @@
 		["\\left\\|", "\\right\\|"],
 		["\\left\\{", "\\right\\}"],
 		["\\left<", "\\right>"],
-		["$", "$"],
+		// ["$", "$"], // for bracket pair colorizer
 
-		["\\left.", "\\right"],
+		["\\left.", "\\right)"],
+		["\\left.", "\\right]"],
+		["\\left.", "\\right|"],
+		["\\left.", "\\right\\|"],
+		["\\left.", "\\right\\}"],
+		["\\left.", "\\right>"],
+
+		["\\left(", "\\right."],
+		["\\left[", "\\right."],
+		["\\left|", "\\right."],
+		["\\left\\|", "\\right."],
+		["\\left\\{", "\\right."],
+		["\\left<", "\\right."],
 
 		["{", "}"],
 		["[", "]"],
