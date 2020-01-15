@@ -168,10 +168,6 @@
 		"math-blocks": {
 			"patterns": [
 				{
-					"include": "#comments"
-				},
-
-				{
 					"begin": "(\\\\\\[)",
 					"beginCaptures": {
 						"1": {
@@ -186,9 +182,6 @@
 					},
 					"name": "support.class.math.block.latex",
 					"patterns": [
-						{
-							"include": "#braces"
-						},
 						{
 							"include": "#math-formulas"
 						},
@@ -212,9 +205,6 @@
 					},
 					"name": "support.class.math.block.latex",
 					"patterns": [
-						{
-							"include": "#braces"
-						},
 						{
 							"include": "#math-formulas"
 						},
@@ -244,9 +234,6 @@
 						},
 						{
 							"include": "#math-formulas"
-						},
-						{
-							"include": "#braces"
 						},
 						{
 							"include": "#main-blocks"
@@ -289,9 +276,6 @@
 							"include": "#math-formulas"
 						},
 						{
-							"include": "#braces"
-						},
-						{
 							"include": "#main-blocks"
 						}
 					]
@@ -329,9 +313,6 @@
 						},
 						{
 							"include": "#math-formulas"
-						},
-						{
-							"include": "#braces"
 						},
 						{
 							"include": "#main-blocks"
@@ -372,44 +353,41 @@
 							"include": "#math-formulas"
 						},
 						{
-							"include": "#braces"
-						},
-						{
 							"include": "#main-blocks"
 						}
 					]
 				}
 			],
 			"repository": {
-				"braces": {
-					"begin": "(?<!\\\\)\\{",
-					"beginCaptures": {
-					  "0": {
-						"name": "punctuation.group.begin.tex"
-					  }
-					},
-					"end": "(?<!\\\\)\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.group.end.tex"
-						}
-					},
-					"name": "meta.group.braces.math.latex",
-					"patterns": [
-						{
-							"include": "#math-formulas"
-						},
-						{
-							"include": "#braces"
-						},
-						{
-							"include": "#main-blocks"
-						}
-					]
-				},
 				"math-formulas": {
 					"patterns": [
 						{
+							"Comment": "braces",
+							"begin": "(?<!\\\\)\\{",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.group.begin.tex"
+								}
+							},
+							"end": "(?<!\\\\)\\}",
+							"endCaptures": {
+								"0": {
+									"name": "punctuation.group.end.tex"
+								}
+							},
+							"name": "meta.group.braces.math.latex",
+							"patterns": [
+								{
+									"include": "#math-formulas"
+								},
+								{
+									"include": "#main-blocks"
+								}
+							]
+						},
+
+						{
+							"Comment": "matrix",
 							"begin": "(?:\\s*)((\\\\)begin)(\\{)([a-zA-Z]*matrix)(\\})",
 							"captures": {
 								"1": {
@@ -440,131 +418,197 @@
 									"include": "#math-formulas"
 								},
 								{
-									"include": "#braces"
-								},
-								{
 									"include": "#main-blocks"
 								}
 							]
 						},
 
 						{
-							"include": "math"
-						}
-					]
-				},
-				"math": {
-					"Source": "latex - workshop",
-					"patterns": [
-						{
+							"match": "(\\\\)left\\\\\\{",
 							"captures": {
 								"1": {
-									"name": "punctuation.definition.constant.math.tex"
+									"name": "punctuation.definition.constant.math.latex"
 								}
 							},
-							"match": "(\\\\)(s(s(earrow|warrow|lash)|h(ort(downarrow|uparrow|parallel|leftarrow|rightarrow|mid)|arp)|tar|i(gma|m(eq)?)|u(cc(sim|n(sim|approx)|curlyeq|eq|approx)?|pset(neq(q)?|plus(eq)?|eq(q)?)?|rd|m|bset(neq(q)?|plus(eq)?|eq(q)?)?)|p(hericalangle|adesuit)|e(tminus|arrow)|q(su(pset(eq)?|bset(eq)?)|c(up|ap)|uare)|warrow|m(ile|all(s(etminus|mile)|frown)))|h(slash|ook(leftarrow|rightarrow)|eartsuit|bar)|R(sh|ightarrow|e|bag)|Gam(e|ma)|n(s(hort(parallel|mid)|im|u(cc(eq)?|pseteq(q)?|bseteq))|Rightarrow|n(earrow|warrow)|cong|triangle(left(eq(slant)?)?|right(eq(slant)?)?)|i(plus)?|u|p(lus|arallel|rec(eq)?)|e(q|arrow|g|xists)|v(dash|Dash)|warrow|le(ss|q(slant|q)?|ft(arrow|rightarrow))|a(tural|bla)|VDash|rightarrow|g(tr|eq(slant|q)?)|mid|Left(arrow|rightarrow))|c(hi|irc(eq|le(d(circ|S|dash|ast)|arrow(left|right)))?|o(ng|prod|lon|mplement)|dot(s|p)?|u(p|r(vearrow(left|right)|ly(eq(succ|prec)|vee(downarrow|uparrow)?|wedge(downarrow|uparrow)?)))|enterdot|lubsuit|ap)|Xi|Maps(to(char)?|from(char)?)|B(ox|umpeq|bbk)|t(h(ick(sim|approx)|e(ta|refore))|imes|op|wohead(leftarrow|rightarrow)|a(u|lloblong)|riangle(down|q|left(eq(slant)?)?|right(eq(slant)?)?)?)|i(n(t(er(cal|leave))?|plus|fty)?|ota|math)|S(igma|u(pset|bset))|zeta|o(slash|times|int|dot|plus|vee|wedge|lessthan|greaterthan|m(inus|ega)|b(slash|long|ar))|d(i(v(ideontimes)?|a(g(down|up)|mond(suit)?)|gamma)|o(t(plus|eq(dot)?)|ublebarwedge|wn(harpoon(left|right)|downarrows|arrow))|d(ots|agger)|elta|a(sh(v|leftarrow|rightarrow)|leth|gger))|Y(down|up|left|right)|C(up|ap)|u(n(lhd|rhd)|p(silon|harpoon(left|right)|downarrow|uparrows|lus|arrow)|lcorner|rcorner)|jmath|Theta|Im|p(si|hi|i(tchfork)?|erp|ar(tial|allel)|r(ime|o(d|pto)|ec(sim|n(sim|approx)|curlyeq|eq|approx)?)|m)|e(t(h|a)|psilon|q(slant(less|gtr)|circ|uiv)|ll|xists|mptyset)|Omega|D(iamond|ownarrow|elta)|v(d(ots|ash)|ee(bar)?|Dash|ar(s(igma|u(psetneq(q)?|bsetneq(q)?))|nothing|curly(vee|wedge)|t(heta|imes|riangle(left|right)?)|o(slash|circle|times|dot|plus|vee|wedge|lessthan|ast|greaterthan|minus|b(slash|ar))|p(hi|i|ropto)|epsilon|kappa|rho|bigcirc))|kappa|Up(silon|downarrow|arrow)|Join|f(orall|lat|a(t(s(emi|lash)|bslash)|llingdotseq)|rown)|P(si|hi|i)|w(p|edge|r)|l(hd|n(sim|eq(q)?|approx)|ceil|times|ightning|o(ng(left(arrow|rightarrow)|rightarrow|maps(to|from))|zenge|oparrow(left|right))|dot(s|p)|e(ss(sim|dot|eq(qgtr|gtr)|approx|gtr)|q(slant|q)?|ft(slice|harpoon(down|up)|threetimes|leftarrows|arrow(t(ail|riangle))?|right(squigarrow|harpoons|arrow(s|triangle|eq)?))|adsto)|vertneqq|floor|l(c(orner|eil)|floor|l|bracket)?|a(ngle|mbda)|rcorner|bag)|a(s(ymp|t)|ngle|pprox(eq)?|l(pha|eph)|rrownot|malg)|V(dash|vdash)|r(h(o|d)|ceil|times|i(singdotseq|ght(s(quigarrow|lice)|harpoon(down|up)|threetimes|left(harpoons|arrows)|arrow(t(ail|riangle))?|rightarrows))|floor|angle|r(ceil|parenthesis|floor|bracket)|bag)|g(n(sim|eq(q)?|approx)|tr(sim|dot|eq(qless|less)|less|approx)|imel|eq(slant|q)?|vertneqq|amma|g(g)?)|Finv|xi|m(ho|i(nuso|d)|o(o|dels)|u(ltimap)?|p|e(asuredangle|rge)|aps(to|from(char)?))|b(i(n(dnasrepma|ampersand)|g(s(tar|qc(up|ap))|nplus|c(irc|u(p|rly(vee|wedge))|ap)|triangle(down|up)|interleave|o(times|dot|plus)|uplus|parallel|vee|wedge|box))|o(t|wtie|x(slash|circle|times|dot|plus|empty|ast|minus|b(slash|ox|ar)))|u(llet|mpeq)|e(cause|t(h|ween|a))|lack(square|triangle(down|left|right)?|lozenge)|a(ck(s(im(eq)?|lash)|prime|epsilon)|r(o|wedge))|bslash)|L(sh|ong(left(arrow|rightarrow)|rightarrow|maps(to|from))|eft(arrow|rightarrow)|leftarrow|ambda|bag)|Arrownot)(?=\\b|_)",
-							"name": "constant.character.math.tex"
+							"name": "punctuation.math.pair.begin.bracket.curly.latex"
 						},
 						{
+							"match": "(\\\\)right\\\\\\}",
 							"captures": {
 								"1": {
-									"name": "punctuation.definition.constant.math.tex"
+									"name": "punctuation.definition.constant.math.latex"
 								}
 							},
-							"match": "(\\\\)(sum|prod|coprod|int|oint|bigcap|bigcup|bigsqcup|bigvee|bigwedge|bigodot|bigotimes|bogoplus|biguplus)\\b",
-							"name": "constant.character.math.tex"
+							"name": "punctuation.math.pair.end.bracket.curly.latex"
 						},
 						{
+							"match": "(\\\\)left\\(",
 							"captures": {
 								"1": {
-									"name": "punctuation.definition.constant.math.tex"
+									"name": "punctuation.definition.constant.math.latex"
 								}
 							},
-							"match": "(\\\\)(arccos|arcsin|arctan|arg|cos|cosh|cot|coth|csc|deg|det|dim|exp|gcd|hom|inf|ker|lg|lim|liminf|limsup|ln|log|max|min|pr|sec|sin|sinh|sup|tan|tanh)\\b",
-							"name": "constant.other.math.tex"
+							"name": "punctuation.math.pair.begin.bracket.round.latex"
+						},
+						{
+							"match": "(\\\\)right\\)",
+							"captures": {
+								"1": {
+									"name": "punctuation.definition.constant.math.latex"
+								}
+							},
+							"name": "punctuation.math.pair.end.bracket.round.latex"
+						},
+						{
+							"match": "(\\\\)left\\[",
+							"captures": {
+								"1": {
+									"name": "punctuation.definition.constant.math.latex"
+								}
+							},
+							"name": "punctuation.math.pair.begin.bracket.square.latex"
+						},
+						{
+							"match": "(\\\\)right\\]",
+							"captures": {
+								"1": {
+									"name": "punctuation.definition.constant.math.latex"
+								}
+							},
+							"name": "punctuation.math.pair.end.bracket.square.latex"
+						},
+						
+						{
+							"match": "(?<!\\\\left|\\\\)\\\\\\{",
+							"name": "punctuation.math.begin.bracket.curly.latex"
+						},
+						{
+							"match": "(?<!\\\\right|\\\\)\\\\\\}",
+							"name": "punctuation.math.end.bracket.curly.latex"
+						},
+						{
+							"match": "(?<!\\\\left|\\\\)\\(",
+							"name": "punctuation.math.begin.bracket.round.latex"
+						},
+						{
+							"match": "(?<!\\\\right|\\\\)\\)",
+							"name": "punctuation.math.end.bracket.round.latex"
+						},
+						{
+							"match": "(?<!\\\\left|\\\\)\\[",
+							"name": "punctuation.math.begin.bracket.square.latex"
+						},
+						{
+							"match": "(?<!\\\\right|\\\\)\\]",
+							"name": "punctuation.math.end.bracket.square.latex"
 						},
 
 						{
-						  "begin": "((\\\\)Sexpr(\\{))",
-						  "beginCaptures": {
-							"1": {
-							  "name": "support.function.sexpr.math.tex"
-							},
-							"2": {
-							  "name": "punctuation.definition.function.math.tex"
-							},
-							"3": {
-							  "name": "punctuation.section.embedded.begin.math.tex"
-							}
-						  },
-						  "contentName": "support.function.sexpr.math.tex",
-						  "end": "(((\\})))",
-						  "endCaptures": {
-							"1": {
-							  "name": "support.function.sexpr.math.tex"
-							},
-							"2": {
-							  "name": "punctuation.section.embedded.end.math.tex"
-							},
-							"3": {
-							  "name": "source.r"
-							}
-						  },
-						  "name": "meta.embedded.line.r",
-						  "patterns": [
-							{
-							  "begin": "\\G(?!\\})",
-							  "end": "(?=\\})",
-							  "name": "source.r",
-							  "patterns": [
+							"include": "#math"
+						}
+					],
+					"repository": {
+						"math": {
+							"Source": "latex - workshop",
+							"patterns": [
 								{
-								  "include": "source.r"
+									"captures": {
+										"1": {
+											"name": "punctuation.definition.constant.math.latex"
+										}
+									},
+									"match": "(\\\\)(s(s(earrow|warrow|lash)|h(ort(downarrow|uparrow|parallel|leftarrow|rightarrow|mid)|arp)|tar|i(gma|m(eq)?)|u(cc(sim|n(sim|approx)|curlyeq|eq|approx)?|pset(neq(q)?|plus(eq)?|eq(q)?)?|rd|m|bset(neq(q)?|plus(eq)?|eq(q)?)?)|p(hericalangle|adesuit)|e(tminus|arrow)|q(su(pset(eq)?|bset(eq)?)|c(up|ap)|uare)|warrow|m(ile|all(s(etminus|mile)|frown)))|h(slash|ook(leftarrow|rightarrow)|eartsuit|bar)|R(sh|ightarrow|e|bag)|Gam(e|ma)|n(s(hort(parallel|mid)|im|u(cc(eq)?|pseteq(q)?|bseteq))|Rightarrow|n(earrow|warrow)|cong|triangle(left(eq(slant)?)?|right(eq(slant)?)?)|i(plus)?|u|p(lus|arallel|rec(eq)?)|e(q|arrow|g|xists)|v(dash|Dash)|warrow|le(ss|q(slant|q)?|ft(arrow|rightarrow))|a(tural|bla)|VDash|rightarrow|g(tr|eq(slant|q)?)|mid|Left(arrow|rightarrow))|c(hi|irc(eq|le(d(circ|S|dash|ast)|arrow(left|right)))?|o(ng|prod|lon|mplement)|dot(s|p)?|u(p|r(vearrow(left|right)|ly(eq(succ|prec)|vee(downarrow|uparrow)?|wedge(downarrow|uparrow)?)))|enterdot|lubsuit|ap)|Xi|Maps(to(char)?|from(char)?)|B(ox|umpeq|bbk)|t(h(ick(sim|approx)|e(ta|refore))|imes|op|wohead(leftarrow|rightarrow)|a(u|lloblong)|riangle(down|q|left(eq(slant)?)?|right(eq(slant)?)?)?)|i(n(t(er(cal|leave))?|plus|fty)?|ota|math)|S(igma|u(pset|bset))|zeta|o(slash|times|int|dot|plus|vee|wedge|lessthan|greaterthan|m(inus|ega)|b(slash|long|ar))|d(i(v(ideontimes)?|a(g(down|up)|mond(suit)?)|gamma)|o(t(plus|eq(dot)?)|ublebarwedge|wn(harpoon(left|right)|downarrows|arrow))|d(ots|agger)|elta|a(sh(v|leftarrow|rightarrow)|leth|gger))|Y(down|up|left|right)|C(up|ap)|u(n(lhd|rhd)|p(silon|harpoon(left|right)|downarrow|uparrows|lus|arrow)|lcorner|rcorner)|jmath|Theta|Im|p(si|hi|i(tchfork)?|erp|ar(tial|allel)|r(ime|o(d|pto)|ec(sim|n(sim|approx)|curlyeq|eq|approx)?)|m)|e(t(h|a)|psilon|q(slant(less|gtr)|circ|uiv)|ll|xists|mptyset)|Omega|D(iamond|ownarrow|elta)|v(d(ots|ash)|ee(bar)?|Dash|ar(s(igma|u(psetneq(q)?|bsetneq(q)?))|nothing|curly(vee|wedge)|t(heta|imes|riangle(left|right)?)|o(slash|circle|times|dot|plus|vee|wedge|lessthan|ast|greaterthan|minus|b(slash|ar))|p(hi|i|ropto)|epsilon|kappa|rho|bigcirc))|kappa|Up(silon|downarrow|arrow)|Join|f(orall|lat|a(t(s(emi|lash)|bslash)|llingdotseq)|rown)|P(si|hi|i)|w(p|edge|r)|l(hd|n(sim|eq(q)?|approx)|ceil|times|ightning|o(ng(left(arrow|rightarrow)|rightarrow|maps(to|from))|zenge|oparrow(left|right))|dot(s|p)|e(ss(sim|dot|eq(qgtr|gtr)|approx|gtr)|q(slant|q)?|ft(slice|harpoon(down|up)|threetimes|leftarrows|arrow(t(ail|riangle))?|right(squigarrow|harpoons|arrow(s|triangle|eq)?))|adsto)|vertneqq|floor|l(c(orner|eil)|floor|l|bracket)?|a(ngle|mbda)|rcorner|bag)|a(s(ymp|t)|ngle|pprox(eq)?|l(pha|eph)|rrownot|malg)|V(dash|vdash)|r(h(o|d)|ceil|times|i(singdotseq|ght(s(quigarrow|lice)|harpoon(down|up)|threetimes|left(harpoons|arrows)|arrow(t(ail|riangle))?|rightarrows))|floor|angle|r(ceil|parenthesis|floor|bracket)|bag)|g(n(sim|eq(q)?|approx)|tr(sim|dot|eq(qless|less)|less|approx)|imel|eq(slant|q)?|vertneqq|amma|g(g)?)|Finv|xi|m(ho|i(nuso|d)|o(o|dels)|u(ltimap)?|p|e(asuredangle|rge)|aps(to|from(char)?))|b(i(n(dnasrepma|ampersand)|g(s(tar|qc(up|ap))|nplus|c(irc|u(p|rly(vee|wedge))|ap)|triangle(down|up)|interleave|o(times|dot|plus)|uplus|parallel|vee|wedge|box))|o(t|wtie|x(slash|circle|times|dot|plus|empty|ast|minus|b(slash|ox|ar)))|u(llet|mpeq)|e(cause|t(h|ween|a))|lack(square|triangle(down|left|right)?|lozenge)|a(ck(s(im(eq)?|lash)|prime|epsilon)|r(o|wedge))|bslash)|L(sh|ong(left(arrow|rightarrow)|rightarrow|maps(to|from))|eft(arrow|rightarrow)|leftarrow|ambda|bag)|Arrownot)(?=\\b|_)",
+									"name": "constant.character.math.tex"
+								},
+								{
+									"captures": {
+										"1": {
+											"name": "punctuation.definition.constant.math.latex"
+										}
+									},
+									"match": "(\\\\)(sum|prod|coprod|int|oint|bigcap|bigcup|bigsqcup|bigvee|bigwedge|bigodot|bigotimes|bogoplus|biguplus)\\b",
+									"name": "constant.character.math.tex"
+								},
+								{
+									"captures": {
+										"1": {
+											"name": "punctuation.definition.constant.math.latex"
+										}
+									},
+									"match": "(\\\\)(arccos|arcsin|arctan|arg|cos|cosh|cot|coth|csc|deg|det|dim|exp|gcd|hom|inf|ker|lg|lim|liminf|limsup|ln|log|max|min|pr|sec|sin|sinh|sup|tan|tanh)\\b",
+									"name": "constant.other.math.tex"
+								},
+		
+								{
+								  "begin": "((\\\\)Sexpr(\\{))",
+								  "beginCaptures": {
+									"1": {
+									  "name": "support.function.sexpr.math.tex"
+									},
+									"2": {
+									  "name": "punctuation.definition.function.math.tex"
+									},
+									"3": {
+									  "name": "punctuation.section.embedded.begin.math.tex"
+									}
+								  },
+								  "contentName": "support.function.sexpr.math.tex",
+								  "end": "(((\\})))",
+								  "endCaptures": {
+									"1": {
+									  "name": "support.function.sexpr.math.tex"
+									},
+									"2": {
+									  "name": "punctuation.section.embedded.end.math.tex"
+									},
+									"3": {
+									  "name": "source.r"
+									}
+								  },
+								  "name": "meta.embedded.line.r",
+								  "patterns": [
+									{
+									  "begin": "\\G(?!\\})",
+									  "end": "(?=\\})",
+									  "name": "source.r",
+									  "patterns": [
+										{
+										  "include": "source.r"
+										}
+									  ]
+									}
+								  ]
+								},
+		
+								{
+									"captures": {
+										"1": {
+											"name": "punctuation.definition.constant.math.latex"
+										}
+									},
+									"match": "(\\\\)(?!begin\\{|verb)([A-Za-z]+)",
+									"name": "constant.other.general.math.tex"
+								},
+								{
+									"match": "(([0-9]*[\\.][0-9]+)|[0-9]+)",
+									"name": "constant.numeric.math.tex"
+								},
+								{
+									"match": "«press a-z and space for greek letter»[a-zA-Z]*",
+									"name": "meta.placeholder.greek.math.tex"
 								}
-							  ]
-							}
-						  ]
-						},
-
-						{
-							"captures": {
-								"1": {
-									"name": "punctuation.definition.constant.math.tex"
-								}
-							},
-							"match": "(\\\\)(?!begin\\{|verb)([A-Za-z]+)",
-							"name": "constant.other.general.math.tex"
-						},
-						{
-							"match": "(?<!\\\\)\\{",
-							"name": "punctuation.math.begin.bracket.curly"
-						},
-						{
-							"match": "(?<!\\\\)\\}",
-							"name": "punctuation.math.end.bracket.curly"
-						},
-						{
-							"match": "\\(",
-							"name": "punctuation.math.begin.bracket.round"
-						},
-						{
-							"match": "\\)",
-							"name": "punctuation.math.end.bracket.round"
-						},
-						{
-							"match": "(([0-9]*[\\.][0-9]+)|[0-9]+)",
-							"name": "constant.numeric.math.tex"
-						},
-						{
-							"match": "«press a-z and space for greek letter»[a-zA-Z]*",
-							"name": "meta.placeholder.greek.math.tex"
+							]
 						}
-					]
+					}
 				}
 			}
 		},
 
 		"main-blocks": {
 			"patterns": [
+				{
+					"include": "#comments"
+				},
 				{
 					"include": "#reference"
 				},

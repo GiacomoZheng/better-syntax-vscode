@@ -19,7 +19,7 @@
     },
     "qna": "https://github.com/GiacomoZheng/better-syntax-vscode/issues",
 
-    "extensionPack": [
+    "__extensionPack": [
         "james-yu.latex-workshop"
     ],
     "extensionKind": [ "ui" ],
@@ -28,7 +28,7 @@
         "languages": [
             {
                 "id": "latex",
-                "aliases": ["LaTeX", "latex"],
+                "aliases": ["LaTeX"],
                 "extensions": [".tex"],
                 "configuration": "./language-configuration/latex.language-configuration.json"
             }
