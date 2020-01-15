@@ -26,6 +26,10 @@
 		// ["\\left\\{", "\\right."],
 		// ["\\left<", "\\right."],
 
+		// ["\\|", "\\|"], // for bracket pair colorizer
+		["\\{", "\\}"],
+		
+		// ["|", "|"], // for bracket pair colorizer
 		["{", "}"],
 		["[", "]"],
 		["(", ")"]
