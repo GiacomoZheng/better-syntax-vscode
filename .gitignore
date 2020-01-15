@@ -1,7 +1,10 @@
-node_modules
-*.vsix
-tmlanguage.json
 .vscode
 .vscode-test
+
+node_modules
+
+tmlanguage.json
 .vscodeignore
+_*
+*.vsix
 *.log
