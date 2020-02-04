@@ -16,7 +16,8 @@ Github username: [GiacomoZheng](https://github.com/GiacomoZheng/better-syntax-vs
 
 ## Features
 
-* Better (for me) latex stynax highlight.
+* Better (for me) `latex` stynax highlight.
+* Better (for me) `scheme` stynax highlight. (I cut lots of functions of it and rename it as `pure scheme`)
 
 ## Extension Settings
 

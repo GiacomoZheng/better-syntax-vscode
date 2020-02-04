@@ -1,0 +1,198 @@
+{
+    "$schema": "../tmlanguage.json",
+    "Source": "sjhuangx.vscode-scheme",
+
+    "name": "PureScheme",
+
+    "scopeName": "source.purescheme",
+    "patterns": [
+        {
+            "include": "#pscmlang"
+        }
+    ],
+    "repository": {
+        "pscmlang": {
+            "patterns": [
+                {
+					"include": "#comments"
+				},
+				{
+					"include": "#invalids"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+                    "Comment": "includes constants",
+					"include": "#sections"
+				}
+            ]
+        },
+        "comments": {
+			"patterns": [
+				{
+					"include": "#block-comments"
+				},
+				{
+					"include": "#line-comments"
+                }
+            ],
+            "repository": {
+                "block-comments": {
+                    "begin": "(#\\|)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.block.begin.purescheme"
+                        }
+                    },
+                    "end": "(\\|#)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.block.end.purescheme"
+                        }
+                    },
+                    "name": "comment.block.purescheme",
+                    "patterns": [
+                        {
+                            "include": "#strings"
+                        },
+                        {
+                            "include": "#better-comments"
+                        }
+                    ]
+                },
+                "line-comments": {
+                    "begin": "(;)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.line.purescheme"
+                        }
+                    },
+                    "end": "(?=$|(?<=\\s);)",
+                    "name": "comment.line.purescheme",
+                    "patterns": [
+                        {
+                            "include": "#better-comments"
+                        }
+                    ]
+                },
+                "better-comments": {
+                    "patterns": [
+                        {
+                            "match": "(?<=^|\\G)\\s*(?i:\\+|todo).*?(?=$|(?<=\\s);)",
+                            "name": "comment.todo.purescheme"
+                        },
+                        {
+                            "match": "(?<=^|\\G)\\s*(?i:\\*|note).*?(?=$|(?<=\\s);)",
+                            "name": "comment.note.purescheme"
+                        },
+                        {
+                            "match": "(?<=^|\\G)\\s*(?i:\\?|wait).*?(?=$|(?<=\\s);)",
+                            "name": "comment.wait.purescheme"
+                        },
+                        {
+                            "match": "(?<=^|\\G)\\s*(?i:\\!|warn).*?(?=$|(?<=\\s);)",
+                            "name": "comment.warn.purescheme"
+                        }
+                    ]
+                }
+            }
+        },
+        "invalids": {
+            "patterns": [
+                {
+                    "name": "invalid.illegal.parenthesis.purescheme",
+                    "match": "[\\[\\]\\{\\}]|\\(\\("
+                }
+            ]
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "name": "constant.language.boolean.purescheme",
+                    "match": "#[tf]"
+                },
+                {
+                    "name": "constant.numeric.purescheme",
+                    "match": "(?<=[\\(\\s])((#e|#i)?[0-9]+(\\.[0-9]+)?|(#x)[0-9a-fA-F]+|(#o)[0-7]+|(#b)[01]+)(?=[\\s;()'\",\\[\\]])"
+                },
+                {
+                    "name": "keyword.control.purescheme",
+                    "match": "(?<=[\\(\\s])(do|or|and|else|quasiquote|begin|if|case|set!|cond|let|unquote|define|let\\*|unquote-splicing|delay|letrec)(?=[\\s\\)])"
+                },
+                {
+                    "Comment": "These functions run a test, and return a boolean answer.",
+                    "name": "support.function.boolean-test.purescheme",
+                    "match": "(?<=[\\(\\s])(char-alphabetic|char-lower-case|char-numeric|char-ready|char-upper-case|char-whitespace|(?:char|string)(?:-ci)?(?:=|<=?|>=?)|atom|boolean|bound-identifier=|char|complex|identifier|integer|symbol|free-identifier=|inexact|eof-object|exact|list|(?:input|output)-port|pair|real|rational|zero|vector|negative|odd|null|string|eq|equal|eqv|even|number|positive|procedure)\\?(?=[\\s\\)])"
+                },
+                {
+                    "Comment": "These functions change one type into another.",
+                    "name": "support.function.convert-type.purescheme",
+                    "match": "(?<=[\\(\\s])(char->integer|exact->inexact|inexact->exact|integer->char|symbol->string|list->vector|list->string|identifier->symbol|vector->list|string->list|string->number|string->symbol|number->string)(?=[\\s\\)])"
+                },
+                {
+                    "Comment": "These functions are potentially dangerous because they have side-effects which could affect other parts of the program.",
+                    "name": "invalid.deprecated.function.with-side-effects.purescheme",
+                    "match": "(?<=[\\(\\s])(set-(?:car|cdr)|(?:vector|string)-(?:fill|set))!(?=[\\s\\)])"
+                },
+                {
+                    "Comment": "+, -, *, /, =, >, etc. ",
+                    "name": "keyword.operator.arithmetic.purescheme",
+                    "match": "(?<=[\\(\\s])(>=?|<=?|=|[*/+-])(?=[\\s\\)])"
+                },
+                {
+                    "name": "support.function.general.purescheme",
+                    "match": "(?x)(?<=[\\(\\s])(append|apply|approximate|    call-with-current-continuation|call/cc|catch|   construct-identifier|define-syntax|display|foo|    for-each|force|format|cd|gen-counter|gen-loser| generate-identifier|last-pair|length|let-syntax| letrec-syntax|list|list-ref|list-tail|load|log|  macro|magnitude|map|map-streams|max|member|memq|  memv|min|newline|nil|not|peek-char|rationalize|   read|read-char|return|reverse|sequence|substring|  syntax|syntax-rules|transcript-off|transcript-on| truncate|unwrap-syntax|values-list|write|write-char| cons|c(a|d){1,4}r|   abs|acos|angle|asin|assoc|assq|assv|atan|ceiling| cos|floor|round|sin|sqrt|tan|    (?:real|imag)-part|numerator|denominator    modulo|exp|expt|remainder|quotient|lcm| call-with-(?:input|output)-file| (?:close|current)-(?:input|output)-port| with-(?:input|output)-from-file| open-(?:input|output)-file|  char-(?:downcase|upcase|ready)|   make-(?:polar|promise|rectangular|string|vector)   string(?:-(?:append|copy|length|ref))?|    vector(?:-length|-ref))(?=[\\s\\)])"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "(\")",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.begin.purescheme"
+                        }
+                    },
+                    "end": "(\")",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.purescheme"
+                        }
+                    },
+                    "name": "string.quoted.double.purescheme",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.purescheme",
+                            "match": "\\\\."
+                        }
+                    ]
+                }
+            ]
+        },
+        "sections": {
+            "begin": "(\\()",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.section.expression.begin.purescheme"
+                }
+            },
+            "end": "(\\))",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.expression.end.purescheme"
+                }
+            },
+            "name": "meta.expression.scheme",
+            "patterns": [
+                {
+                    "include": "#pscmlang"
+                },
+				{
+					"include": "#constants"
+				}
+            ]
+        }
+    }
+}

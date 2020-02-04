@@ -31,7 +31,13 @@
                 "aliases": ["LaTeX"],
                 "extensions": [".tex"],
                 "configuration": "./language-configuration/latex.language-configuration.json"
-            }
+            },
+            {
+				"id": "purescheme",
+				"aliases": ["Pure Scheme"],
+				"extensions": [".pscm"],
+				"configuration": "./language-configuration/purescheme.language-configuration.json"
+			}
         ],
         "grammars": [
             {
@@ -53,19 +59,32 @@
 					"text.xtml": "xtml",
 					"source.yaml": "yaml"
 				}
-            }
+            },
+
+            {
+				"language": "purescheme",
+				"scopeName": "source.purescheme",
+				"path": "./syntaxes/purescheme.tmLanguage.json"
+			},
+			{
+				"scopeName": "markdown.scheme.codeblock",
+				"path": "./syntaxes/purescheme.markdown.tmLanguage.json",
+				"injectTo": [
+					"text.html.markdown"
+				]
+			}
         ],
 
         "configurationDefaults": {
             "[latex]": {
-                "files.autoGuessEncoding": false,
-                "files.encoding": "utf8",
-                "editor.insertSpaces": false,
-
 				"editor.formatOnPaste": false,
 				"editor.formatOnSave": false,
 				"editor.suggestSelection": "recentlyUsedByPrefix"
-			}
+            },
+            "[purescheme]": {
+				"editor.insertSpaces": false,
+				"editor.tabSize": 2
+            }
 		}
     }
 }
